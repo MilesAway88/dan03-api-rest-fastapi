@@ -1,4 +1,4 @@
-# Tienda de plantas MilesPlant - API REST
+# Tienda de plantas MilesPlants - API REST
 
 ## UT3 - Integración y despliegue de aplicaciones en la nube
 
