@@ -18,7 +18,7 @@ openapi_tags = [
 # Se ejecuta al iniciar el servidor
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # init_db()
+    init_db()
     print("Prueba de conexión OK")
     yield
 

@@ -1,3 +1,3 @@
-from app.models.pedido import Pedido, PedidoDetalle
-from app.models.planta import Planta
-from app.models.user import User
+from .pedido import Pedido, PedidoDetalle
+from .planta import Planta
+from .user import User
