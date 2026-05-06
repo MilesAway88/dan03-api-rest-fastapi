@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
+from app.api.plantas import router as plantas_router
 from app.core.database import init_db
 
 openapi_tags = [
@@ -13,7 +14,12 @@ openapi_tags = [
         "name": "Pedidos",
         "description": "Operaciones para gestionar pedidos."
     },
+    {
+        "name": "Usuarios",
+        "description": "Operaciones para registrar y loguear usuarios."
+    },
 ]
+
 
 # Se ejecuta al iniciar el servidor
 @asynccontextmanager
@@ -21,6 +27,7 @@ async def lifespan(app: FastAPI):
     init_db()
     print("Prueba de conexión OK")
     yield
+
 
 app = FastAPI(
     title="MilesPlantsAPI",
@@ -38,3 +45,7 @@ app = FastAPI(
     openapi_tags=openapi_tags,
     lifespan=lifespan
 )
+
+
+# Registro de routers
+app.include_router(plantas_router)
