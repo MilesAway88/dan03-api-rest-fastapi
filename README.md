@@ -14,10 +14,24 @@ API REST para la gestión de una tienda de plantas. Permite el registro y autent
 
 - **app/:** Aplicación y lógica principal
 - **docker/:** Dockerfile y docker-compose.yml
+- **scripts/db_seed.py:** Script para sembrar datos de prueba
 - **tests/:** Pruebas automatizadas
 - **.github/workflows/:** Pipeline de integración y despliegue continuo
 - **.env.example:** Plantilla de variables de entorno
 - **requirements.txt:** Dependencias de Python
+
+## Endpoints
+
+| Método | Ruta | Acceso | Descripción |
+|--------|------|--------|-------------|
+| GET | `/plantas` | Público | Listar catálogo completo |
+| GET | `/planta/{id}` | Público | Detalles de una planta |
+| POST | `/plantas` | Público | Crear nueva planta |
+| POST | `/auth/register` | Público | Registro de usuario |
+| POST | `/auth/login` | Público | Login y obtención de token |
+| GET | `/pedidos/` | Privado | Listar mis pedidos |
+| POST | `/pedidos/` | Privado | Crear nuevo pedido |
+| GET | `/pedidos/{id}` | Privado | Detalles de un pedido propio |
 
 ## Instalación y configuración en local
 
@@ -59,10 +73,33 @@ pip install -r requirements.txt
 
 Copia el archivo .env.example y rellena las credenciales correspondientes.
 
-### 5. Iniciar el servidor
+### 5. (OPCIONAL) Ejecutar script para datos de prueba
+
+```bash
+python scripts/db_seed.py
+```
+
+> Esto creará 4 plantas, un usuario de prueba (`test@test.com` / `test1234`) y un pedido de ejemplo.
+
+### 6. Iniciar el servidor
 
 ```bash
 uvicorn app.main:app --reload
+```
+
+### 7. Probar en Postman
+
+- Loguearse:
+
+```bash
+POST /auth/login ---> {"email": "test@test.com", "password": "test1234"}
+```
+
+- Introducir token recibido en el apartado "Authorization > Bearer Token"
+- Hacer un GET para pedidos:
+
+```bash
+GET /pedidos/ ---> Debería mostrar el pedido de ejemplo creado
 ```
 
 ## Ejecución con Docker Compose
@@ -80,6 +117,7 @@ docker compose -f docker/docker-compose.yml ps
 ```
 
 ### 3. Acceder a la API
+
 > Puerto 8000 por defecto en FastAPI/Uvicorn
 
 - http://localhost:8000
