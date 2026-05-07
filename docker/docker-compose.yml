@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  # BD
+  db:
+    image: mariadb:11
+    container_name: milesplants-db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - milesplants-net
+
+  # FastAPI
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: milesplants-api
+    depends_on:
+      - db
+    restart: unless-stopped
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+    ports:
+      - "8000:8000"
+    networks:
+      - milesplants-net
+    command: >
+      sh -c "
+        echo 'Ejecutando seed de datos...' &&
+        python scripts/db_seed.py &&
+        echo 'Iniciando API...' &&
+        uvicorn app.main:app --host 0.0.0.0 --port 8000
+      "
+
+volumes:
+  db_data:
+
+networks:
+  milesplants-net:
+    driver: bridge

@@ -79,7 +79,7 @@ Copia el archivo .env.example y rellena las credenciales correspondientes.
 python scripts/db_seed.py
 ```
 
-> Esto creará 4 plantas, un usuario de prueba (`test@test.com` / `test1234`) y un pedido de ejemplo.
+> Esto creará 4 tipos de plantas, un usuario de prueba (`test@test.com` / `test1234`) y un pedido de ejemplo.
 
 ### 6. Iniciar el servidor
 
@@ -103,6 +103,16 @@ GET /pedidos/ ---> Debería mostrar el pedido de ejemplo creado
 ```
 
 ## Ejecución con Docker Compose
+
+> ### Datos de prueba automáticos
+> 
+> Al iniciar la aplicación con Docker, se ejecuta automáticamente un script de seeding que crea:
+> 
+> - 16 plantas de ejemplo
+> - Usuario de prueba: `test@test.com` / `test1234`
+> - Un pedido de ejemplo asociado al usuario
+> 
+> No es necesario ejecutar ningún comando adicional para tener datos de prueba.
 
 ### 1. Construir las imágenes y levantar los servicios (en segundo plano)
 
@@ -137,4 +147,4 @@ El proyecto está accesible en los siguientes enlaces:
 - **Repositorio público:** https://github.com/MilesAway88/dan03-api-rest-fastapi/
 - **Imagen pública en Docker Hub:** []
 - **App desplegada en AWS:** []
-- **Documentación generada por FastAPI:** <url-del-proyecto>/docs o <url-del-proyecto>/redoc
+- **Documentación generada por FastAPI:** `<url-del-proyecto>/docs` o `<url-del-proyecto>/redoc`
