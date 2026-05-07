@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.core.security import create_access_token, get_password_hash, verify_password
 from app.models.user import User
-from app.schemas.user import Token, UserCreate, UserResponse
+from app.schemas.user import Token, UserCreate, UserLogin, UserResponse
 
 router = APIRouter(prefix="/auth", tags=["Usuarios"])
 
@@ -51,7 +51,7 @@ def register_user(usuario: UserCreate, db: Session = Depends(get_db)):
         401: {"description": "Email o contraseña no válidos"}
     }
 )
-def login(usuario: UserCreate, db: Session = Depends(get_db)):
+def login(usuario: UserLogin, db: Session = Depends(get_db)):
     usuario_db = db.query(User).filter(User.email == usuario.email).first()
 
     if not usuario_db or not verify_password(usuario.password, str(usuario_db.password_hash)):
