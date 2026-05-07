@@ -9,6 +9,7 @@ from app.schemas.user import Token, UserCreate, UserLogin, UserResponse
 router = APIRouter(prefix="/auth", tags=["Usuarios"])
 
 
+# POST register
 @router.post(
     "/register",
     response_model=UserResponse,
@@ -16,7 +17,7 @@ router = APIRouter(prefix="/auth", tags=["Usuarios"])
     summary="Registrar nuevo usuario",
     description="Crea un nuevo usuario con email y contraseña. La contraseña se hashea automáticamente",
     responses={
-        400: {"description": "El email ya está registrado"}
+        status.HTTP_400_BAD_REQUEST: {"description": "El email ya está registrado"}
     }
 )
 def register_user(usuario: UserCreate, db: Session = Depends(get_db)):
@@ -42,13 +43,14 @@ def register_user(usuario: UserCreate, db: Session = Depends(get_db)):
     return nuevo_usuario
 
 
+# POST login
 @router.post(
     "/login",
     response_model=Token,
     summary="Inicio de sesión de usuario",
     description="Valida las credenciales y retorna un Bearer Token JWT",
     responses={
-        401: {"description": "Email o contraseña no válidos"}
+        status.HTTP_401_UNAUTHORIZED: {"description": "Email o contraseña no válidos"}
     }
 )
 def login(usuario: UserLogin, db: Session = Depends(get_db)):

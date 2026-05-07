@@ -7,6 +7,7 @@ from app.schemas.planta import PlantaCreate, PlantaResponse
 
 router = APIRouter(tags=["Plantas"])
 
+# GET todas las plantas
 @router.get(
     "/plantas",
     response_model=list[PlantaResponse],
@@ -17,6 +18,7 @@ def get_plantas(db: Session = Depends(get_db)):
     return db.query(Planta).all()
 
 
+# GET planta por ID
 @router.get(
     "/planta/{planta_id}",
     response_model=PlantaResponse,
@@ -38,6 +40,7 @@ def get_planta_by_id(planta_id: int = Path(example=2), db: Session = Depends(get
     return planta
 
 
+# POST planta
 @router.post(
     "/plantas",
     response_model=PlantaResponse,
