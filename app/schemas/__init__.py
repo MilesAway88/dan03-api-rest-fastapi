@@ -5,4 +5,4 @@ from .pedido import (
     PedidoResponse,
 )
 from .planta import PlantaCreate, PlantaResponse
-from .user import UserCreate, UserResponse
+from .user import UserCreate, UserLogin, UserResponse

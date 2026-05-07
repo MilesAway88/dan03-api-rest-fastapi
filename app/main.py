@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
+from app.api.auth import router as auth_router
 from app.api.plantas import router as plantas_router
 from app.core.database import init_db
 
@@ -49,3 +50,4 @@ app = FastAPI(
 
 # Registro de routers
 app.include_router(plantas_router)
+app.include_router(auth_router)
