@@ -15,7 +15,6 @@ API REST para la gestión de una tienda de plantas. Permite el registro y autent
 - **app/:** Aplicación y lógica principal
 - **docker/:** Dockerfile y docker-compose.yml
 - **scripts/db_seed.py:** Script para sembrar datos de prueba
-- **tests/:** Pruebas automatizadas
 - **.github/workflows/:** Pipeline de integración y despliegue continuo
 - **.env.example:** Plantilla de variables de entorno
 - **requirements.txt:** Dependencias de Python
