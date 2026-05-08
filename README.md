@@ -145,5 +145,5 @@ El proyecto está accesible en los siguientes enlaces:
 
 - **Repositorio público:** https://github.com/MilesAway88/dan03-api-rest-fastapi/
 - **Imagen pública en Docker Hub:** https://hub.docker.com/r/milesaway88/milesplants-api
-- **App desplegada en AWS:** [http://51.21.160.251:8000](http://51.21.160.251:8000)
+- **App desplegada en AWS:** [http://51.20.65.29:8000](http://51.20.65.29:8000)
 - **Documentación generada por FastAPI:** `<url-del-proyecto>/docs` o `<url-del-proyecto>/redoc`
